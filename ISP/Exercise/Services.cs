@@ -25,6 +25,6 @@ public interface IGradebook
 
 public interface IContractsBilling
 {
-    void AddCharge(IStudent.IBillngStudent student, decimal amount, string reason);
-    decimal GetBalance(IStudent.IBillngStudent student);
+    void AddCharge(IBillngStudent student, decimal amount, string reason);
+    decimal GetBalance(IBillngStudent student);
 }
