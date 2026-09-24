@@ -4,10 +4,26 @@ namespace DIP.Exercise.Starter;
 
 public class SalesReportGenerator
 {
+    private readonly IReportReader _reader;
+    private readonly IReportWriter _writer;
+
+    public SalesReportGenerator()
+    {
+        _reader = new FileReportReader();
+        _writer = new FileReportWriter();
+    }
+
+    public SalesReportGenerator(
+        IReportReader reader,
+        IReportWriter writer)
+    {
+        _reader = reader;
+        _writer = writer;
+    }
+
     public void Generate(string inputPath, string outputPath)
     {
-        // Intentionally mixed: workflow, business rules, CSV parsing, and text output.
-        var lines = File.ReadAllLines(inputPath);
+        var lines = _reader.Read(inputPath);
         var totals = new SortedDictionary<string, decimal>(StringComparer.Ordinal);
 
         foreach (var line in lines.Skip(1))
@@ -38,6 +54,6 @@ public class SalesReportGenerator
         }
 
         report.Add(FormattableString.Invariant($"TOTAL: {totals.Values.Sum():F2}"));
-        File.WriteAllLines(outputPath, report);
+        _writer.Write(outputPath, report);
     }
 }
