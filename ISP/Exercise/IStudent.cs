@@ -1,19 +1,31 @@
 namespace ISP.Exercise;
 
-public interface IStudent
+public interface IHuman
 {
     Guid Id { get; }
     string FullName { get; }
     string Email { get; }
-    void RecordGrade(string courseCode, decimal points);
-    decimal? GetFinalGrade(string courseCode);
-    void AddCharge(decimal amount, string reason);
-    decimal OutstandingBalance { get; }
 }
 
-public interface ITeacher
+public interface IGradebale
 {
-    Guid Id { get; }
-    string FullName { get; }
-    string Email { get; }
+    void RecordGrade(string courseCode, decimal points);
+    decimal? GetFinalGrade(string courseCode);
+}
+public interface IBilling
+{
+    decimal OutstandingBalance { get; }
+    void AddCharge(decimal amount, string reason);
+}
+public interface IStudent : IHuman, IGradebale, IBilling
+{
+}
+
+public interface IAmateur : IHuman, IGradebale
+{
+    
+}
+
+public interface ITeacher : IHuman
+{
 }
