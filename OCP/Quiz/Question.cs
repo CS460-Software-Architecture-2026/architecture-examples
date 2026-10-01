@@ -7,3 +7,66 @@ public record Question(
     string Prompt,
     string CorrectAnswer,
     string[] Options);
+
+public class QuestionCom
+{
+    QuestionType Type;
+    Question Question;
+    private string Answer;
+    private bool Correct = false;
+
+    public void WhatQuestion(Question question)
+    {
+        Question = question;
+        Type = question.Type;
+        Console.WriteLine(question.Prompt);
+    }
+
+    public void QuestionWrite()
+    {
+        switch (Type)
+        {
+            case QuestionType.Text:
+                Console.WriteLine("Type your answer:");
+                break;
+
+            case QuestionType.MultipleChoice:
+                for (int i = 0; i < Question.Options.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {Question.Options[i]}");
+                }
+
+                Console.WriteLine("Enter the option number:");
+                break;
+        }
+    }
+
+    public void QuestionAskAnswer()
+    {
+        Answer = (Console.ReadLine() ?? "").Trim();
+    }
+
+    public bool CheckAnswer()
+    {
+        Correct = false;
+        switch (Type)
+        {
+            case QuestionType.Text:
+                Correct = Answer.Equals(
+                    Question.CorrectAnswer,
+                    StringComparison.OrdinalIgnoreCase);
+                break;
+
+            case QuestionType.MultipleChoice:
+                Correct = Answer == Question.CorrectAnswer;
+                break;
+        }
+        return Correct;
+    }
+    
+    public bool GetCorrectAnswer()
+    {
+        return Correct;
+    }
+
+}
