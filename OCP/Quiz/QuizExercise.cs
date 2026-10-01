@@ -7,16 +7,21 @@ public class QuizExercise
         Console.WriteLine("QUIZ EXERCISE");
         var questions = new IQuestion[]
         {
-            new TextQuestion(
+            new Question(
+                QuestionType.Text,
                 "What is the capital of France?",
-                "Paris"),
-            new MultipleChoiceQuestion(
+                "Paris",
+                System.Array.Empty<string>()),
+            new Question(
+                QuestionType.MultipleChoice,
                 "Which number is prime?",
-                new[] { "4", "7", "9" },
-                2),
-            new TextQuestion(
+                "2",
+                new[] { "4", "7", "9" }),
+            new Question(
+                QuestionType.Text,
                 "Which C# keyword creates a new object?",
-                "new")
+                "new",
+                System.Array.Empty<string>())
         };
 
         new QuizRunner().Run(questions);
