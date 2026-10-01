@@ -2,6 +2,6 @@ using DIP.Orders;
 using DIP.Discounts;
 using DIP.Exercise;
 
-OrdersExample.Run();
-DiscountsExample.Run();
-SalesReportExercise.Run();
+new OrdersExample().Run();
+new DiscountsExample().Run();
+new SalesReportExercise().Run();

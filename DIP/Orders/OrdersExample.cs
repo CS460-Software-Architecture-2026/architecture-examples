@@ -5,9 +5,9 @@ using AfterOrderService = DIP.Orders.After.Application.OrderService;
 
 namespace DIP.Orders;
 
-public static class OrdersExample
+public class OrdersExample
 {
-    public static void Run()
+    public void Run()
     {
         var order = new Order(42, "customer@example.com", 100m);
 

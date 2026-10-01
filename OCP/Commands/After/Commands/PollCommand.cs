@@ -1,16 +1,14 @@
-using OCP.After.Application;
+using OCP.Commands.After.Application;
 
-namespace OCP.After.Commands;
+namespace OCP.Commands.After.Commands;
 
-// An extension: neither the command loop nor the existing commands need modification.
-public class PollCommand : ICommand
+public class PollCommand : Command
 {
-    public bool CanHandle(string command)
-    {
-        return command.Equals("/poll", StringComparison.OrdinalIgnoreCase);
-    }
+    
+    protected override string CommandName => "/poll";
 
-    public void Execute(string arguments)
+
+    public override void Execute(string arguments)
     {
         var parts = arguments.Split('|', StringSplitOptions.TrimEntries);
         if (parts.Length < 3 || parts.Any(string.IsNullOrWhiteSpace))
