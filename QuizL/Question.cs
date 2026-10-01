@@ -1,12 +1,14 @@
-namespace OCP.Quiz;
+namespace QuizL;
 
 // The starting model stores both kinds of question in the same shape.
 // For multiple choice, CorrectAnswer is the one-based option number as a string.
+
 public record Question(
     QuestionType Type,
     string Prompt,
     string CorrectAnswer,
-    string[] Options);
+    string[] Options,
+    int tolerance = 0);
 
 public class QuestionCom
 {
@@ -38,6 +40,9 @@ public class QuestionCom
 
                 Console.WriteLine("Enter the option number:");
                 break;
+            case QuestionType.Numeric:
+                Console.WriteLine("Type your answer:");
+                break;
         }
     }
 
@@ -59,6 +64,11 @@ public class QuestionCom
 
             case QuestionType.MultipleChoice:
                 Correct = Answer == Question.CorrectAnswer;
+                break;
+            case QuestionType.Numeric:
+                int nubmer = Convert.ToInt32(Answer);
+                int cornumber = Convert.ToInt32(Question.CorrectAnswer);
+                Correct = ((nubmer - Question.tolerance) <= cornumber || cornumber >= (nubmer + Question.tolerance));
                 break;
         }
         return Correct;

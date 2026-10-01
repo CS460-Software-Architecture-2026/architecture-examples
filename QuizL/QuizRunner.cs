@@ -1,4 +1,4 @@
-namespace OCP.Quiz;
+namespace QuizL;
 
 public class QuizRunner
 {
