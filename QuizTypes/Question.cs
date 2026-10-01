@@ -1,5 +1,3 @@
-using OCP.Quiz.Questions;
-
 namespace OCP.Quiz;
 
 // The starting model stores both kinds of question in the same shape.
