@@ -1,4 +1,4 @@
-namespace OCP.Before;
+namespace OCP.Commands.Before;
 
 public class CommandLoop
 {
@@ -29,6 +29,20 @@ public class CommandLoop
                     break;
                 case "/time":
                     Console.WriteLine($"UTC: {DateTimeOffset.UtcNow:HH:mm:ss}");
+                    break;
+                case "/poll":
+                    var pollParts = arguments.Split('|', StringSplitOptions.TrimEntries);
+                    if (pollParts.Length < 3 || pollParts.Any(string.IsNullOrWhiteSpace))
+                    {
+                        Console.WriteLine("Usage: /poll question | option | option");
+                        break;
+                    }
+
+                    Console.WriteLine($"Poll: {pollParts[0]}");
+                    for (var index = 1; index < pollParts.Length; index++)
+                    {
+                        Console.WriteLine($"{index}. {pollParts[index]}");
+                    }
                     break;
                 case "/exit":
                     return;

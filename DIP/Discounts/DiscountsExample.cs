@@ -6,9 +6,9 @@ using ClassesCheckout = DIP.Discounts.Stage2Classes.Application.CheckoutService;
 
 namespace DIP.Discounts;
 
-public static class DiscountsExample
+public class DiscountsExample
 {
-    public static void Run()
+    public void Run()
     {
         const decimal subtotal = 250m;
         const bool isVip = true;

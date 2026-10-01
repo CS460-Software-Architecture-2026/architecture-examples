@@ -5,9 +5,9 @@ using ISP.Products.After.Restocking;
 
 namespace ISP.Products;
 
-public static class ProductsExample
+public class ProductsExample
 {
-    public static void Run()
+    public void Run()
     {
         Console.WriteLine("BEFORE: both clients depend on the entire product contract");
         var before = new Before.Product("Notebook", 80m, "NB-01", 3, 10);
