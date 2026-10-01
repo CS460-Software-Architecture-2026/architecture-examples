@@ -1,3 +1,5 @@
+﻿namespace Quiz.Core;
+
 public class QuizRunner
 {
     public void Run(IEnumerable<Question> questions)

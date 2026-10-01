@@ -1,3 +1,6 @@
+using Quiz.Core;
+using Quiz.Questions;
+
 namespace OCP.Quiz;
 
 public class QuizExercise
@@ -5,23 +8,24 @@ public class QuizExercise
     public void Run()
     {
         Console.WriteLine("QUIZ EXERCISE");
-        var questions = new[]
+        var questions = new Question[]
         {
-            new Question(
-                QuestionType.Text,
-                "What is the capital of France?",
-                "Paris",
-                Array.Empty<string>()),
-            new Question(
-                QuestionType.MultipleChoice,
-                "Which number is prime?",
-                "2",
-                new[] { "4", "7", "9" }),
-            new Question(
-                QuestionType.Text,
-                "Which C# keyword creates a new object?",
-                "new",
-                Array.Empty<string>())
+            new Text 
+            { 
+                Prompt = "What is the capital of France?", 
+                CorrectAnswer = "Paris" 
+            },
+            new MultipleChoice 
+            { 
+                Prompt = "Which number is prime?", 
+                CorrectAnswer = "2", 
+                Options = new[] { "4", "7", "9" } 
+            },
+            new Text 
+            { 
+                Prompt = "Which C# keyword creates a new object?", 
+                CorrectAnswer = "new" 
+            }
         };
 
         new QuizRunner().Run(questions);
