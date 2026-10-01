@@ -1,19 +1,8 @@
-namespace OCP.Quiz;
+using Quiz.Core; 
+namespace Quiz.Questions;
 
 // The starting model stores both kinds of question in the same shape.
 // For multiple choice, CorrectAnswer is the one-based option number as a string.
-public abstract class Question
-{
-    public string Prompt { get; set; }
-    public string CorrectAnswer { get; set; }
-
-    public abstract void PrintQuestion();
-
-    public virtual bool CheckAnswer(string answer)
-    {
-        return answer == CorrectAnswer;
-    }
-}
 
 public class TextQuestion : Question
 {
@@ -57,11 +46,13 @@ public class MultipleChoiceQuestion : Question
 
 public class NumericQuestion : Question
 {
-    public int Tolerance { get; set; }
+    public int ExpectedAnswer { get; }
+    public int Tolerance { get; }
+
     public NumericQuestion(string prompt, int correctAnswer, int tolerance)
     {
         Prompt = prompt;
-        CorrectAnswer = correctAnswer;
+        ExpectedAnswer = correctAnswer;
         Tolerance = tolerance;
     }
 
@@ -74,6 +65,6 @@ public class NumericQuestion : Question
     public override bool CheckAnswer(string answer)
     {
         return int.TryParse(answer, out int userAnswer)
-            && Math.Abs(userAnswer - CorrectAnswer) <= Tolerance;
+            && Math.Abs((long)userAnswer - ExpectedAnswer) <= Tolerance;
     }
 }

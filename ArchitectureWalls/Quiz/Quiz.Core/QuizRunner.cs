@@ -1,5 +1,18 @@
-namespace OCP.Quiz;
+namespace Quiz.Core;
 
+
+public abstract class Question
+{
+    public string Prompt { get; set; }
+    public string CorrectAnswer { get; set; }
+
+    public abstract void PrintQuestion();
+
+    public virtual bool CheckAnswer(string answer)
+    {
+        return answer == CorrectAnswer;
+    }
+}
 public class QuizRunner
 {
     public void Run(List<Question> questions)
