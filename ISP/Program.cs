@@ -1,3 +1,3 @@
 using ISP.Products;
 
-ProductsExample.Run();
+new ProductsExample().Run();

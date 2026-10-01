@@ -1,0 +1,1 @@
+Redesign the model to support both refundable and non-refundable cancellations with accurate confirmations, preserving departure and repeat-cancellation restrictions without type checks in BookingService.
