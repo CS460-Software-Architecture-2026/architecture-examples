@@ -2,9 +2,9 @@ using DIP.Exercise.Starter;
 
 namespace DIP.Exercise;
 
-public static class SalesReportExercise
+public class SalesReportExercise
 {
-    public static void Run()
+    public void Run()
     {
         Console.WriteLine("SALES REPORT EXERCISE: separate workflow, business rules, and file handling");
         var inputPath = Path.Combine(AppContext.BaseDirectory, "Exercise", "Data", "sales.csv");

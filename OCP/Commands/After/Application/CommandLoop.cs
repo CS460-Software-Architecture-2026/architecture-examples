@@ -1,10 +1,10 @@
-namespace OCP.After.Application;
+namespace OCP.Commands.After.Application;
 
 public class CommandLoop
 {
-    private readonly IReadOnlyList<ICommand> commands;
+    private readonly IReadOnlyList<Command> commands;
 
-    public CommandLoop(IEnumerable<ICommand> commands)
+    public CommandLoop(IEnumerable<Command> commands)
     {
         this.commands = commands.ToArray();
     }

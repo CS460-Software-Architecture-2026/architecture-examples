@@ -1,7 +1,7 @@
 namespace ISP.Exercise;
 
 // Exercise: derive interfaces from actual usage in Clients.cs; preserve its behavior.
-// An auditor receives announcements and attends classes, but has no grades or billing.
+// An auditor receives announcements and attends classes, has grades but no billing.
 // Support auditors without adding auditor-specific methods or pretending they are students.
 // Replace the duplicated student/teacher methods with operations on client roles.
 
