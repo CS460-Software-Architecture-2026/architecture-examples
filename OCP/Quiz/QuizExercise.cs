@@ -1,3 +1,5 @@
+using QuizL;
+
 namespace OCP.Quiz;
 
 public class QuizExercise
@@ -21,7 +23,14 @@ public class QuizExercise
                 QuestionType.Text,
                 "Which C# keyword creates a new object?",
                 "new",
-                Array.Empty<string>())
+                Array.Empty<string>()),
+            new Question(
+                QuestionType.Numeric,
+                "2 + 2! = ?",
+                "4",
+                Array.Empty<string>(),
+                1)
+                
         };
 
         new QuizRunner().Run(questions);
