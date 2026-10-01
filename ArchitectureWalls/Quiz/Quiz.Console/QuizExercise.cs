@@ -1,5 +1,6 @@
-namespace OCP.Quiz;
-
+namespace Quiz.Application;
+using Quiz.Core;
+using Quiz.Questions;
 public class QuizExercise
 {
     public void Run()
