@@ -2,11 +2,10 @@ using System.Globalization;
 
 namespace DIP.Exercise.Starter;
 
-public class SalesReportGenerator
+public class CSVParser : ICSVParser
 {
-    public void Generate(string inputPath, string outputPath)
+    public Totals Generate(string inputPath)
     {
-        // Intentionally mixed: workflow, business rules, CSV parsing, and text output.
         var lines = File.ReadAllLines(inputPath);
         var totals = new SortedDictionary<string, decimal>(StringComparer.Ordinal);
 
@@ -31,13 +30,6 @@ public class SalesReportGenerator
             totals[category] = currentTotal + amount;
         }
 
-        var report = new List<string> { "SALES REPORT" };
-        foreach (var entry in totals)
-        {
-            report.Add(FormattableString.Invariant($"{entry.Key}: {entry.Value:F2}"));
-        }
-
-        report.Add(FormattableString.Invariant($"TOTAL: {totals.Values.Sum():F2}"));
-        File.WriteAllLines(outputPath, report);
+        return new Totals(totals);
     }
 }
