@@ -1,18 +1,5 @@
-namespace OCP.Quiz;
+using OCP.Quiz;
 using System.Globalization;
-
-public abstract record Question(string Prompt)
-{
-    public abstract string GetQuestionText();
-    public abstract bool IsCorrect(string answer);
-    
-    public virtual string ReadAnswer()
-    {
-        Console.Write("Your answer: ");
-        return Console.ReadLine()?.Trim() ?? string.Empty;
-    }
-}
-
 
 public record MultipleChoiceQuestion(
     string Prompt,
