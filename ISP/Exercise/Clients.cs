@@ -2,38 +2,28 @@ namespace ISP.Exercise;
 
 public class CourseAnnouncements : ICourseAnnouncements
 {
-    public void SendToStudent(IStudent student, string courseCode, string subject, string body)
+    public void Send(IPerson person, string courseCode, string subject, string body)
     {
-        Console.WriteLine($"To: {student.FullName} <{student.Email}> | {courseCode}: {subject} | {body}");
-    }
-
-    public void SendToTeacher(ITeacher teacher, string courseCode, string subject, string body)
-    {
-        Console.WriteLine($"To: {teacher.FullName} <{teacher.Email}> | {courseCode}: {subject} | {body}");
+        Console.WriteLine($"To: {person.FullName} <{person.Email}> | {courseCode}: {subject} | {body}");
     }
 }
 
 public class AttendanceTracker : IAttendanceTracker
 {
-    public void MarkPresent(IStudent student, string courseCode, DateOnly date)
+    public void MarkPresent(IPerson person, string courseCode, DateOnly date)
     {
-        Console.WriteLine($"{date:yyyy-MM-dd} | {courseCode} | {student.Id} {student.FullName}: present");
-    }
-
-    public void MarkPresentTeacher(ITeacher teacher, string courseCode, DateOnly date)
-    {
-        Console.WriteLine($"{date:yyyy-MM-dd} | {courseCode} | {teacher.Id} {teacher.FullName}: present");
+        Console.WriteLine($"{date:yyyy-MM-dd} | {courseCode} | {person.Id} {person.FullName}: present");
     }
 }
 
 public class Gradebook : IGradebook
 {
-    public void RecordGrade(IStudent student, string courseCode, decimal points)
+    public void RecordGrade(IEnrollable student, string courseCode, decimal points)
     {
         student.RecordGrade(courseCode, points);
     }
 
-    public decimal? GetFinal(IStudent student, string courseCode)
+    public decimal? GetFinal(IEnrollable student, string courseCode)
     {
         return student.GetFinalGrade(courseCode);
     }
@@ -41,12 +31,12 @@ public class Gradebook : IGradebook
 
 public class ContractsBilling : IContractsBilling
 {
-    public void AddCharge(IStudent student, decimal amount, string reason)
+    public void AddCharge(IBillable student, decimal amount, string reason)
     {
         student.AddCharge(amount, reason);
     }
 
-    public decimal GetBalance(IStudent student)
+    public decimal GetBalance(IBillable student)
     {
         return student.OutstandingBalance;
     }
