@@ -1,15 +1,39 @@
 namespace Observer.Exercise;
 
-// Simulate download progress (0–100); no actual downloading is required.
-// Add two subscribers: one prints progress after each change, the other prints
-// "Download complete" when progress reaches 100. Repeating a value must not notify.
-// Demonstrate updates at 10, 50, and 100, and unsubscribing the progress display
-// while keeping the completion notification subscribed.
-// Implement two variants: OOP Observer with an interface, and C# delegates/events.
 public class Downloader
 {
+    private int progress;
+
+    private readonly List<IDownloadListener> listeners = new();
+
+    public Downloader()
+    {
+        listeners.Add(new ProgressDisplay());
+        listeners.Add(new CompletionNotification());
+    }
+
+    public void AddListener(IDownloadListener listener)
+    {
+        listeners.Add(listener);
+    }
+
+    public void RemoveListener(IDownloadListener listener)
+    {
+        listeners.Remove(listener);
+    }
+
     public void UpdateProgress(int percentage)
     {
-        // TODO: Update progress and notify subscribers.
+        if (progress == percentage)
+        {
+            return;
+        }
+
+        progress = percentage;
+
+        foreach (var listener in listeners)
+        {
+            listener.OnProgressChanged(progress);
+        }
     }
 }
