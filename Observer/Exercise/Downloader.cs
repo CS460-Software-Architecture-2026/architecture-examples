@@ -1,6 +1,6 @@
 namespace Observer.Exercise;
 
-// Variant 1: Observer with interface
+// Variant 1: OOP Observer with an interface
 
 public interface IProgressObserver
 {
