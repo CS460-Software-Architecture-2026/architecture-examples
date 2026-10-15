@@ -1,4 +1,4 @@
-﻿namespace Observer.Exercise;
+﻿namespace Observer.OOP.Exercise;
 
 public interface IProgressListener
 {

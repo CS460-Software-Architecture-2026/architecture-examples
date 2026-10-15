@@ -1,4 +1,4 @@
-﻿namespace Observer.Exercise;
+﻿namespace Observer.OOP.Exercise;
 
 //the other prints "Download complete" when progress reaches 100.
 public class DownloadCompletePrinter : IProgressListener

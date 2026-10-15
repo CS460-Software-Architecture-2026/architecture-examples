@@ -1,4 +1,4 @@
-﻿namespace Observer.Exercise;
+﻿namespace Observer.OOP.Exercise;
 
 // one prints progress after each change,
 public class ProgressPrinter : IProgressListener

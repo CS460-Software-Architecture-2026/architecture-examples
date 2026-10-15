@@ -1,4 +1,4 @@
-namespace Observer.Exercise;
+namespace Observer.OOP.Exercise;
 
 // Simulate download progress (0–100); no actual downloading is required.
 // Add two subscribers: one prints progress after each change, the other prints
