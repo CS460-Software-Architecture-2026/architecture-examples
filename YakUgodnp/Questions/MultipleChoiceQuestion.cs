@@ -1,6 +1,6 @@
 namespace OCP.Quiz;
 
-public class MultipleChoiceQuestion : Question
+public record MultipleChoiceQuestion : Question
 {
     private readonly string correctAnswer;
     private readonly string[] options;

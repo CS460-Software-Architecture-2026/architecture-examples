@@ -1,6 +1,6 @@
 namespace OCP.Quiz;
 
-public class TextQuestion : Question
+public record TextQuestion : Question
 {
     private readonly string correctAnswer;
 

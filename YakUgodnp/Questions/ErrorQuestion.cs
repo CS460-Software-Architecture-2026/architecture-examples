@@ -1,14 +1,16 @@
-namespace OCP.Quiz;
+using OCP.Quiz.Application;
+
+namespace OCP.Quiz.Questions;
 
 public class ErrorQuestion : Question
 {
     private readonly double correctAnswer;
-    private readonly double error;
+    private double error;
 
     public ErrorQuestion(string prompt, double correctAnswer, double error) : base(prompt)
     {
         this.correctAnswer = correctAnswer;
-        this.error = error
+        this.error = error;
     }
 
     public override void Display()
@@ -16,7 +18,12 @@ public class ErrorQuestion : Question
         Console.WriteLine("Type your answer:");
     }
 
-    public override bool CheckAnswer(string answer)
+    public override bool IsCorrectAnswer(string answer)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool CheckAnswer(string answer)
     {
         if (!double.TryParse(answer, out double value))
         {

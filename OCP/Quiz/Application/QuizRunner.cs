@@ -1,4 +1,4 @@
-namespace OCP.Quiz;
+namespace OCP.Quiz.Application;
 
 public class QuizRunner
 {
@@ -12,37 +12,11 @@ public class QuizRunner
             total++;
             Console.WriteLine(question.Prompt);
 
-            // Adding a question type currently means editing both switches.
-            switch (question.Type)
-            {
-                case QuestionType.Text:
-                    Console.WriteLine("Type your answer:");
-                    break;
-
-                case QuestionType.MultipleChoice:
-                    for (int i = 0; i < question.Options.Length; i++)
-                    {
-                        Console.WriteLine($"{i + 1}. {question.Options[i]}");
-                    }
-                    Console.WriteLine("Enter the option number:");
-                    break;
-            }
+            question.Display();
 
             string answer = (Console.ReadLine() ?? "").Trim();
-            bool correct = false;
+            bool correct = question.IsCorrectAnswer();
 
-            switch (question.Type)
-            {
-                case QuestionType.Text:
-                    correct = answer.Equals(
-                        question.CorrectAnswer,
-                        StringComparison.OrdinalIgnoreCase);
-                    break;
-
-                case QuestionType.MultipleChoice:
-                    correct = answer == question.CorrectAnswer;
-                    break;
-            }
 
             if (correct)
             {
