@@ -5,23 +5,22 @@ public class QuizExercise
     public void Run()
     {
         Console.WriteLine("QUIZ EXERCISE");
-        var questions = new[]
+        var questions = new Question[]
         {
-            new Question(
-                QuestionType.Text,
+            new TextQuestion(
                 "What is the capital of France?",
-                "Paris",
-                Array.Empty<string>()),
-            new Question(
-                QuestionType.MultipleChoice,
+                "Paris"),
+            new MultipleChoiceQuestion(
                 "Which number is prime?",
-                "2",
-                new[] { "4", "7", "9" }),
-            new Question(
-                QuestionType.Text,
+                new[] { "4", "7", "9" },
+                2),
+            new TextQuestion(
                 "Which C# keyword creates a new object?",
-                "new",
-                Array.Empty<string>())
+                "new"),
+            new NumericQuestion(
+                "What is the value of pi to two decimal places?",
+                3.14,
+                0.005)
         };
 
         new QuizRunner().Run(questions);
