@@ -1,8 +1,11 @@
 namespace OCP.Quiz;
 
+using System;
+using System.Collections.Generic;
+
 public class QuizRunner
 {
-    public void Run(IEnumerable<Question> questions)
+    public void Run(IEnumerable<IQuestion> questions)
     {
         int score = 0;
         int total = 0;
@@ -10,39 +13,10 @@ public class QuizRunner
         foreach (var question in questions)
         {
             total++;
-            Console.WriteLine(question.Prompt);
+            question.Display();
 
-            // Adding a question type currently means editing both switches.
-            switch (question.Type)
-            {
-                case QuestionType.Text:
-                    Console.WriteLine("Type your answer:");
-                    break;
-
-                case QuestionType.MultipleChoice:
-                    for (int i = 0; i < question.Options.Length; i++)
-                    {
-                        Console.WriteLine($"{i + 1}. {question.Options[i]}");
-                    }
-                    Console.WriteLine("Enter the option number:");
-                    break;
-            }
-
-            string answer = (Console.ReadLine() ?? "").Trim();
-            bool correct = false;
-
-            switch (question.Type)
-            {
-                case QuestionType.Text:
-                    correct = answer.Equals(
-                        question.CorrectAnswer,
-                        StringComparison.OrdinalIgnoreCase);
-                    break;
-
-                case QuestionType.MultipleChoice:
-                    correct = answer == question.CorrectAnswer;
-                    break;
-            }
+            string answer = (Console.ReadLine() ?? string.Empty).Trim();
+            bool correct = question.ValidateAnswer(answer);
 
             if (correct)
             {
