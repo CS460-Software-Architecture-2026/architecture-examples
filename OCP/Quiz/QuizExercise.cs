@@ -5,13 +5,13 @@ public class QuizExercise
     public void Run()
     {
         Console.WriteLine("QUIZ EXERCISE");
-        var questions = new[]
+        var questions = new IQuestion[]
         {
             new Question(
                 QuestionType.Text,
                 "What is the capital of France?",
                 "Paris",
-                Array.Empty<string>()),
+                System.Array.Empty<string>()),
             new Question(
                 QuestionType.MultipleChoice,
                 "Which number is prime?",
@@ -21,7 +21,7 @@ public class QuizExercise
                 QuestionType.Text,
                 "Which C# keyword creates a new object?",
                 "new",
-                Array.Empty<string>())
+                System.Array.Empty<string>())
         };
 
         new QuizRunner().Run(questions);

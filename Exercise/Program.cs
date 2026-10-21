@@ -1,29 +1,28 @@
 using Exercise;
 
-if (args.Length == 0)
+var composer = new HttpRequestComposer()
+    .SetUrl("https://example.com/products")
+    .SetMethod("POST")
+    .AddHeader("Content-Type", "application/json")
+    .AddQueryParameter("preview", "true")
+    .SetBody("{\"product\":\"Keyboard\",\"quantity\":2}");
+
+var request = composer.Build();
+
+Console.WriteLine(request.Method);
+Console.WriteLine(request.Url);
+Console.WriteLine(request.Headers["Content-Type"]);
+Console.WriteLine(request.QueryParameters["preview"]);
+Console.WriteLine(request.Body);
+
+try
 {
-    Console.WriteLine("Usage: dotnet run --project Exercise/Exercise.csproj -- <URL>");
-    return;
+    new HttpRequestComposer()
+        .SetUrl("not-a-url")
+        .SetMethod("GET")
+        .Build();
 }
-
-var request = new HttpRequest
+catch (ArgumentException ex)
 {
-    Url = args[0],
-    Method = "POST",
-    Headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-    {
-        ["Content-Type"] = "application/json"
-    },
-    QueryParameters = new Dictionary<string, string>
-    {
-        ["preview"] = "true"
-    },
-    Body = "{\"product\":\"Keyboard\",\"quantity\":2}"
-};
-
-using var httpClient = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false });
-IClient client = new Client(httpClient);
-
-using var response = await client.SendAsync(request);
-Console.WriteLine($"Status: {(int)response.StatusCode} {response.StatusCode}");
-Console.WriteLine(await response.Content.ReadAsStringAsync());
+    Console.WriteLine($"Validation error: {ex.Message}");
+}
