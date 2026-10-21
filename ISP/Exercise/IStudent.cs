@@ -7,8 +7,12 @@ public interface IStudent
     string Email { get; }
     void RecordGrade(string courseCode, decimal points);
     decimal? GetFinalGrade(string courseCode);
-    void AddCharge(decimal amount, string reason);
-    decimal OutstandingBalance { get; }
+    
+    public interface IBillngStudent
+    {
+        decimal OutstandingBalance { get; }
+        void AddCharge(decimal amount, string reason);
+    }
 }
 
 public interface ITeacher
