@@ -1,4 +1,4 @@
-namespace DIP.Discounts.Stage1Mess;
+namespacex DIP.Discounts.Stage1Mess;
 
 public class Checkout
 {
