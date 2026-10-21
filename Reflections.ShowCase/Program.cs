@@ -3,13 +3,36 @@ using DemoDomain;
 
 // 1. Load assembly
 //    Option A: current assembly (if type is defined in same project)
-var asm = Assembly.GetExecutingAssembly();
+// var asm = Assembly.GetExecutingAssembly();
 
 //    Option B: by name
 //    Assembly asm = Assembly.Load("DemoDomain");
 
 //    Option C: from file
 //    Assembly asm = Assembly.LoadFrom("DemoDomain.dll");
+
+// Assembly asm = Assembly.LoadFrom(Path.Combine(AppContext.BaseDirectory, "Command.Contracts.dll"));
+Assembly asm = Assembly.LoadFrom(Path.Combine(AppContext.BaseDirectory, "UserCommands.dll"));
+
+var contracts = Assembly.LoadFrom(Path.Combine(AppContext.BaseDirectory, "Command.Contracts.dll"));
+var commands  = Assembly.LoadFrom(Path.Combine(AppContext.BaseDirectory, "UserCommands.dll"));
+
+Type commandAttributeType = contracts.GetType("CommandContracts.CommandAttribute")!;
+PropertyInfo nameProp = commandAttributeType.GetProperty("Name")!;
+
+foreach (var type in commands.GetTypes())
+{
+    var attr = type.GetCustomAttribute(commandAttributeType);
+
+    if (attr is null)
+    {
+        continue;
+    }
+
+    var name = (string)nameProp.GetValue(attr)!;
+    Console.WriteLine($"{name} --> {type.Name}");
+}
+
 
 // 2. List all types
 Console.WriteLine("=== Types in assembly ===");
