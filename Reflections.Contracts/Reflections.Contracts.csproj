@@ -6,4 +6,10 @@
         <AssemblyName>Command.Contracts</AssemblyName>
         <RootNamespace>CommandContracts</RootNamespace>
     </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Command.Contracts">
+            <HintPath>../Reflections.Exercise/Command.Contracts.dll</HintPath>
+            <Private>true</Private>
+        </Reference>
+    </ItemGroup>
 </Project>
