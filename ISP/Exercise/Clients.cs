@@ -41,12 +41,12 @@ public class Gradebook : IGradebook
 
 public class ContractsBilling : IContractsBilling
 {
-    public void AddCharge(IStudent student, decimal amount, string reason)
+    public void AddCharge(IStudent.IBillngStudent student, decimal amount, string reason)
     {
         student.AddCharge(amount, reason);
     }
 
-    public decimal GetBalance(IStudent student)
+    public decimal GetBalance(IStudent.IBillngStudent student)
     {
         return student.OutstandingBalance;
     }
