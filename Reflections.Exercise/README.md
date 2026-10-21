@@ -13,3 +13,30 @@ Work in groups of three. Build a console runner that discovers classes marked `[
 Inspect the metadata rather than assuming class names or public method names identify executable commands. Divide the work into discovery, argument conversion, and execution with the input loop. Each member should be ready to show their work during the session.
 
 Optional: generate `help` from command names and parameter information.
+
+## Running the implementation
+
+```sh
+dotnet run --project Reflections.Exercise/Reflections.Exercise.csproj
+```
+
+Requires the .NET 10 SDK. The project copies both supplied DLLs to its output.
+Enter `help` to see the actual command names and argument types discovered from
+the library. Enter a command name followed by positional arguments separated by
+whitespace. Boolean arguments accept `true` or `false`. Quoted strings containing
+spaces are not supported. Enter `exit` to quit; end of input also exits.
+
+## Як працює реалізація
+
+- `Program.cs` завантажує `UserCommands.dll` поруч із виконуваним файлом.
+- `CommandDiscovery.cs` через reflection отримує типи, читає `[Command]`
+  і знаходить методи з `[Execute]`. Назва команди береться з `Name` атрибута.
+- `ArgumentConverter.cs` перевіряє кількість аргументів і перетворює текст
+  у `string`, `int` або `bool` відповідно до параметрів знайденого методу.
+- `CommandRunner.cs` читає введення, знаходить команду, створює об'єкт для
+  нестатичного методу й викликає його через `MethodInfo.Invoke`.
+  Після помилок цикл продовжує роботу. `help` формується з метаданих.
+
+Reflection — це дослідження структури типів під час виконання програми.
+`Type` описує тип, `MethodInfo` описує метод, а `ParameterInfo` — його параметр.
+Атрибути лише позначають класи й методи: пошук і виконання робить runner.
