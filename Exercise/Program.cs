@@ -1,5 +1,27 @@
 using Exercise;
 
+
+var builder = new HttpRequestBuilder()
+    .WithUrl("https://example.com")
+    .WithMethod("POST")
+    .WithHeader("Content-Type", "application/json")
+    .WithQueryParameter("page", "1")
+    .WithBody("Hello");
+
+var first = builder.Build();
+builder.Save();
+builder.WithMethod("PUT").WithBody("Changed");
+Console.WriteLine(builder.Build().Method); 
+builder.Undo();
+builder.Undo();
+Console.WriteLine(builder.Build().Method);
+
+builder.WithMethod("DELETE");
+builder.Restore();
+Console.WriteLine(builder.Build().Method); 
+
+Console.WriteLine(first.Method); 
+
 if (args.Length == 0)
 {
     Console.WriteLine("Usage: dotnet run --project Exercise/Exercise.csproj -- <URL>");
