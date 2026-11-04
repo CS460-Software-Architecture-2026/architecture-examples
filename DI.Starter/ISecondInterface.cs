@@ -6,12 +6,14 @@ public interface ISecondInterface
 
 public class SecondImplementation : ISecondInterface
 {
-    private IFirstInterface firstInterface;
+    private readonly IFirstInterface firstInterface;
     
     public SecondImplementation(IFirstInterface firstInterface)
     {
         this.firstInterface = firstInterface;
     }
+
+    public IFirstInterface FirstInterface => firstInterface;
     
     public override string ToString()
     {
