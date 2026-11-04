@@ -15,13 +15,11 @@ Console.WriteLine("Task 2: transient and singleton lifetimes");
 var transient1 = di.Resolve<IFirstInterface>();
 var transient2 = di.Resolve<IFirstInterface>();
 Console.WriteLine($"Two transient resolutions are different: {!ReferenceEquals(transient1, transient2)}");
-Console.WriteLine(
-    $"Those transient instances share the singleton printer: " +
+Console.WriteLine($"Those transient instances share the singleton printer: " +
     $"{ReferenceEquals(((FirstImplementation)transient1).Printer, ((FirstImplementation)transient2).Printer)}");
 
 var singleton1 = (SecondImplementation)di.Resolve<ISecondInterface>();
 var singleton2 = (SecondImplementation)di.Resolve<ISecondInterface>();
 Console.WriteLine($"Two singleton resolutions are the same: {ReferenceEquals(singleton1, singleton2)}");
-Console.WriteLine(
-    $"The singleton keeps the same transient dependency: " +
+Console.WriteLine($"The singleton keeps the same transient dependency: " +
     $"{ReferenceEquals(singleton1.FirstInterface, singleton2.FirstInterface)}");

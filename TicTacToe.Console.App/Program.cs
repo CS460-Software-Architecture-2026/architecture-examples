@@ -1,9 +1,15 @@
 ﻿using Examples.TicTacToe;
 using Examples.TicTacToe.Consoled;
 
-var  game = new TicTacToeWithEvents(new Player("A"), new Player("B") );
-var output = new ConsoleOutput();
-output.ListenTo(game);
+var playerA = new Player("A");
+var playerB = new Player("B");
+var game = new TicTacToeWithEvents(playerA, playerB);
 
-var input = new ConsoleInput();
+var boardView = new ConsoleOutput();
+boardView.ListenTo(game);
+
+var countView = new PlayerCellCountOutput(playerA, playerB);
+countView.ListenTo(game);
+
+var input = new NumberedCellInput();
 input.StartProcessing(game);
