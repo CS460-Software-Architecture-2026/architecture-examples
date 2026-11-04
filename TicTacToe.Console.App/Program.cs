@@ -7,3 +7,6 @@ output.ListenTo(game);
 
 var input = new ConsoleInput();
 input.StartProcessing(game);
+
+var statsOutput = new StatsOutput();
+statsOutput.ListenTo(game);
