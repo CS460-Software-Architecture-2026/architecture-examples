@@ -19,7 +19,7 @@
                         game.StartGame();
                         break;
                     case "exit":
-                        break;
+                        return;
                     case "move":
                         var x = int.Parse(splitCommand[1]);
                         var y = int.Parse(splitCommand[2]);
