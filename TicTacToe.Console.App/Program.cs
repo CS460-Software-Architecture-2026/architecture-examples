@@ -7,5 +7,5 @@ var output2 = new ConsolCustomView();
 output.ListenTo(game);
 output2.ListenTo(game);
 
-var input = new ConsoleInput();
+var input = new ConsoleInput1_9();
 input.StartProcessing(game);
