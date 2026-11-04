@@ -1,3 +1,5 @@
+using DI.Starter;
+
 public interface ISecondInterface
 {
     
@@ -6,11 +8,11 @@ public interface ISecondInterface
 
 public class SecondImplementation : ISecondInterface
 {
-    private IFirstInterface firstInterface;
+    private IThirdInterface thirdInterface;
     
-    public SecondImplementation(IFirstInterface firstInterface)
+    public SecondImplementation(IThirdInterface thirdInterface)
     {
-        this.firstInterface = firstInterface;
+        this.thirdInterface = thirdInterface;
     }
     
     public override string ToString()
