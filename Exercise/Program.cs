@@ -6,24 +6,33 @@ if (args.Length == 0)
     return;
 }
 
-var request = new HttpRequest
+try
 {
-    Url = args[0],
-    Method = "POST",
-    Headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-    {
-        ["Content-Type"] = "application/json"
-    },
-    QueryParameters = new Dictionary<string, string>
-    {
-        ["preview"] = "true"
-    },
-    Body = "{\"product\":\"Keyboard\",\"quantity\":2}"
-};
+    new HttpRequestBuilder().WithMethod("GET").Build();
+}
+catch (Exception e)
+{
+    Console.WriteLine($"Validation: {e.Message}");
+}
 
-using var httpClient = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false });
+var builder = new HttpRequestBuilder()
+    .WithUrl(args[0])
+    .WithMethod("POST")
+    .WithHeader("Content-Type", "application/json")
+    .WithQueryParameter("preview", "true")
+    .WithBody("{\"product\":\"Keyboard\",\"quantity\":2}");
+
+var req1 = builder.Build();
+
+builder.WithHeader("Authorization", "Bearer secret");
+var req2 = builder.Build();
+
+Console.WriteLine($"req1 headers: {req1.Headers.Count}");
+Console.WriteLine($"req2 headers: {req2.Headers.Count}");
+
+var httpClient = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false });
 IClient client = new Client(httpClient);
 
-using var response = await client.SendAsync(request);
+var response = await client.SendAsync(req2);
 Console.WriteLine($"Status: {(int)response.StatusCode} {response.StatusCode}");
 Console.WriteLine(await response.Content.ReadAsStringAsync());
