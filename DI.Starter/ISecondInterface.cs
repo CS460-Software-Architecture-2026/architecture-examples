@@ -1,16 +1,16 @@
 public interface ISecondInterface
 {
-    
+    IFirstInterface First { get; }
 }
 
 
 public class SecondImplementation : ISecondInterface
 {
-    private IFirstInterface firstInterface;
+    public IFirstInterface First { get; }
     
     public SecondImplementation(IFirstInterface firstInterface)
     {
-        this.firstInterface = firstInterface;
+        First = firstInterface;
     }
     
     public override string ToString()

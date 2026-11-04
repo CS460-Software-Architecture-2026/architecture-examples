@@ -10,3 +10,16 @@ public class FirstImplementation : IFirstInterface
         return $"First_{GetHashCode()}";
     }
 }
+
+public class AlternativeFirstImplementation : IFirstInterface
+{
+}
+
+public class CircularFirstImplementation : IFirstInterface
+{
+    public ISecondInterface Second { get; }
+    public CircularFirstImplementation(ISecondInterface secondInterface)
+    {
+        Second = secondInterface;
+    }
+}
