@@ -5,7 +5,7 @@ public interface ITestInterface
     
 }
 
-public class TestInterface : ITestInterface
+public class TestImplementation : ITestInterface
 {
     public override string ToString()
     {
