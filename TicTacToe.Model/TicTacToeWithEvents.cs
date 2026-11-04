@@ -12,6 +12,8 @@ namespace Examples.TicTacToe
         
         public event Action MatchDrawn;
         
+        public event Action<Player> CellMarked;
+        
         public TicTacToeWithEvents(Player firstPlayer, Player secondPlayer) : base(firstPlayer, secondPlayer)
         {
         }
@@ -26,6 +28,7 @@ namespace Examples.TicTacToe
         {
             base.MarkCell(x, y, player);
             FieldUpdated?.Invoke(GetField());
+            CellMarked?.Invoke(player);
         }
 
         protected override void EndGame(Player winner = null)
