@@ -40,9 +40,9 @@ namespace Examples.TicTacToe.Consoled
             }
         }
 
-        private void GameOnGameStarted(Cell[,] obj)
+        private void GameOnGameStarted(Cell[,] field)
         {
-            Console.Out.WriteLine("Game is started! Make your first move with MOVE X Y");
+            OnFieldUpdated(field);
         }
     }
 }
