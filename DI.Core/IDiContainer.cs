@@ -6,6 +6,8 @@ public interface IDiContainer
         where TImplementation : TInterface;
 
     T Resolve<T>();
+    
+    void Register<TInterface>(TInterface instance);
 }
 
 public enum Scope

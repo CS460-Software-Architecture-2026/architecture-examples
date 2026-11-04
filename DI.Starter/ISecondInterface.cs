@@ -1,20 +1,20 @@
 public interface ISecondInterface
 {
-    
+    public IFirstInterface First { get; }
 }
 
 
 public class SecondImplementation : ISecondInterface
 {
-    private IFirstInterface firstInterface;
-    
+    public IFirstInterface First { get; }
     public SecondImplementation(IFirstInterface firstInterface)
     {
-        this.firstInterface = firstInterface;
+        this.First = firstInterface;
     }
     
     public override string ToString()
     {
         return $"Second_{GetHashCode()}";
     }
+    
 }
