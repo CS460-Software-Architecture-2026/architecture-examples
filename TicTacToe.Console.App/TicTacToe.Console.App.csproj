@@ -10,8 +10,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TicTacToe.Console.Input\TicTacToe.Console.Input.csproj" />
+      <ProjectReference Include="..\TicTacToe.Console.NumberInput\TicTacToe.Console.NumberInput.csproj" />
       <ProjectReference Include="..\TicTacToe.Model\TicTacToe.Model.csproj" />
       <ProjectReference Include="..\TicTacToe.View.Console\TicTacToe.View.Console.csproj" />
+      <ProjectReference Include="..\TicTacToe.View.WithStats\TicTacToe.View.WithStats.csproj" />
     </ItemGroup>
 
 </Project>
