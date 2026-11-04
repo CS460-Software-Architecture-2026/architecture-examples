@@ -15,6 +15,6 @@ public class SecondImplementation : ISecondInterface
     
     public override string ToString()
     {
-        return $"Second_{GetHashCode()}";
+        return $"Second_{GetHashCode()} (with {firstInterface})";
     }
 }
