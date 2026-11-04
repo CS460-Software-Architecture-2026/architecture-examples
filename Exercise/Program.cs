@@ -6,20 +6,13 @@ if (args.Length == 0)
     return;
 }
 
-var request = new HttpRequest
-{
-    Url = args[0],
-    Method = "POST",
-    Headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-    {
-        ["Content-Type"] = "application/json"
-    },
-    QueryParameters = new Dictionary<string, string>
-    {
-        ["preview"] = "true"
-    },
-    Body = "{\"product\":\"Keyboard\",\"quantity\":2}"
-};
+var request = new HttpRequestBuilder()
+    .WithUrl(args[0])
+    .WithMethod("POST")
+    .WithHeader("Content-Type", "application/json")
+    .WithQueryParameter("preview", "true")
+    .WithBody("{\"product\":\"Keyboard\",\"quantity\":2}")
+    .Build();
 
 using var httpClient = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false });
 IClient client = new Client(httpClient);
