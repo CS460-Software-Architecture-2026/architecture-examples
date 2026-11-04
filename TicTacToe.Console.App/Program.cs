@@ -5,5 +5,8 @@ var  game = new TicTacToeWithEvents(new Player("A"), new Player("B") );
 var output = new ConsoleOutput();
 output.ListenTo(game);
 
-var input = new ConsoleInput();
+var stats = new StatsOutput();
+stats.ListenTo(game);
+
+var input = new NumberConsoleInput();
 input.StartProcessing(game);
