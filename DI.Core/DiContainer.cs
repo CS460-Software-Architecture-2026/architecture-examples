@@ -3,10 +3,10 @@ namespace DI.Core;
 public class DiContainer : IDiContainer
 {
     private readonly Dictionary<Type, Binding> typesToImplementation = new();
-    
+
     private readonly Dictionary<Type, object> typesToObjects = new();
 
-    public void Register<TInterface, TImplementation>(Scope scope) 
+    public void Register<TInterface, TImplementation>(Scope scope)
         where TImplementation : TInterface
     {
         typesToImplementation[typeof(TInterface)] = new Binding()
@@ -16,15 +16,28 @@ public class DiContainer : IDiContainer
             Scope = scope
         };
     }
+    
+    public void Register<TInterface>(TInterface implementation, Scope scope)
+    {
+        typesToImplementation[typeof(TInterface)] = new Binding()
+        {
+            InterfaceType = typeof(TInterface),
+            ImplementationType = implementation.GetType(),
+            Scope = scope
+        };
+        
+        typesToObjects[typeof(TInterface)] = implementation; 
+    }
 
     public object Resolve(Type type)
     {
         var binding = typesToImplementation[type];
-        if (typesToObjects.TryGetValue(type, out var result))
+
+        if (binding.Scope == Scope.Singleton && typesToObjects.TryGetValue(type, out var result))
         {
             return result;
         }
-        
+
         var implementationType = binding.ImplementationType;
         var constructor = implementationType.GetConstructors().First();
         var args = new List<object>();
@@ -34,7 +47,12 @@ public class DiContainer : IDiContainer
         }
 
         var instance = constructor.Invoke(args.ToArray());
-        typesToObjects[type] = instance;
+
+        if (binding.Scope == Scope.Transient)
+        {
+            typesToObjects[type] = instance;    
+        }
+        
         return instance;
     }
 
@@ -42,11 +60,11 @@ public class DiContainer : IDiContainer
     {
         return (T)Resolve(typeof(T));
     }
-    
+
     private class Binding
     {
         public required Type InterfaceType { get; init; }
-        
+
         public required Type ImplementationType { get; init; }
 
         public required Scope Scope { get; init; }
