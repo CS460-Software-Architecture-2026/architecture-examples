@@ -19,7 +19,7 @@ public class CellNumInput
                     game.StartGame();
                     break;
                 case "exit":
-                    break;
+                    return;
                 default:
                     if (int.TryParse(command, out var cell) && cell is >= 1 and <= 9)
                     {

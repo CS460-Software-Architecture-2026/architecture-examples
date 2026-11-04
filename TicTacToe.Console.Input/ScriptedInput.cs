@@ -1,4 +1,5 @@
 ﻿namespace Examples.TicTacToe.Consoled;
+using Examples.TicTacToe;
 
 public class ScriptedInput
 {
