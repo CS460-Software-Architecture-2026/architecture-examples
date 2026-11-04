@@ -2,8 +2,8 @@
 using Examples.TicTacToe.Consoled;
 
 var  game = new TicTacToeWithEvents(new Player("A"), new Player("B") );
-var output = new ConsoleOutput();
-output.ListenTo(game);
+new ConsoleOutput().ListenTo(game);
+new ConsoleOutputWithStats().ListenTo(game);
 
-var input = new ConsoleInput();
+var input = new ConsoleInputNumber();
 input.StartProcessing(game);
