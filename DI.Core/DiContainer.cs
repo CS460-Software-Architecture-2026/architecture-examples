@@ -16,11 +16,26 @@ public class DiContainer : IDiContainer
             Scope = scope
         };
     }
+    
+    public void Register<TInterface>(TInterface implementation)
+    {
+        if (implementation != null)
+        {
+            var binding = new Binding
+            {
+                InterfaceType = typeof(TInterface),
+                ImplementationType = implementation.GetType(),
+                Scope = Scope.Singleton
+            };
+            typesToObjects[typeof(TInterface)] = implementation;
+            typesToImplementation[typeof(TInterface)] = binding;
+        }
+    }
 
     public object Resolve(Type type)
     {
         var binding = typesToImplementation[type];
-        if (typesToObjects.TryGetValue(type, out var result))
+        if (binding.Scope == Scope.Singleton && typesToObjects.TryGetValue(type, out var result))
         {
             return result;
         }
@@ -34,7 +49,11 @@ public class DiContainer : IDiContainer
         }
 
         var instance = constructor.Invoke(args.ToArray());
-        typesToObjects[type] = instance;
+        if (binding.Scope == Scope.Singleton)
+        {
+            typesToObjects[type] = instance;
+        }
+        
         return instance;
     }
 
