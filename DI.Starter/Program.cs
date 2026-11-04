@@ -1,11 +1,13 @@
 ﻿using DI.Core;
+using DI.Starter;
 
 var di = new DiContainer();
-di.Register<IFirstInterface, FirstImplementation>(Scope.Singleton);
-di.Register<ISecondInterface, SecondImplementation>(Scope.Singleton);
+var test = new TestImplementation();
+di.Register<ITestInterface>(test);
 
-var instance = di.Resolve<IFirstInterface>();
-var instance2 = di.Resolve<IFirstInterface>();
-var instance3 = di.Resolve<ISecondInterface>();
+var resolved = di.Resolve<ITestInterface>();
+var resolved2 = di.Resolve<ITestInterface>();
 
-
+Console.WriteLine(test);
+Console.WriteLine(resolved);
+Console.WriteLine(resolved2);
