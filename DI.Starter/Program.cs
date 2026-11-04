@@ -1,10 +1,10 @@
 ﻿using DI.Core;
 
 var di = new DiContainer();
-di.Register<IFirstInterface, FirstImplementation>(Scope.Singleton);
-di.Register<ISecondInterface, SecondImplementation>(Scope.Singleton);
-di.Register<IThirdInterface, ThirdImplementation>(Scope.Singleton);
-di.Register<IFourthInterface, FourthImplementation>(Scope.Singleton);
+di.Register<IFirstInterface, FirstImplementation>(Scope.Transient);
+di.Register<ISecondInterface, SecondImplementation>(Scope.Transient);
+di.Register<IThirdInterface, ThirdImplementation>(Scope.Transient);
+di.Register<IFourthInterface, FourthImplementation>(Scope.Transient);
 
 
 var instance = di.Resolve<IFirstInterface>();
