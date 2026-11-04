@@ -2,14 +2,21 @@
 using DI.Starter;
 
 var di = new DiContainer();
-di.Register<IFirstInterface, FirstImplementation>(Scope.Singleton);
-di.Register<ISecondInterface, SecondImplementation>(Scope.Singleton);
-di.Register<ITestImplementation, TestImplementation>(Scope.Singleton);
+di.Register<IFirstInterface, FirstImplementation>(Scope.Transient);
+di.Register<ITestInterface, TestInterface>(Scope.Singleton);
 
-var test = di.Resolve<ITestImplementation>();
-var test_1 = di.Resolve<ITestImplementation>();
+var test = di.Resolve<ITestInterface>();
+var test_1 = di.Resolve<ITestInterface>();
 
 Console.WriteLine(test);
 Console.WriteLine(test_1);
 
+// Prediction: if Transient depends on singleton - no problem
+// check
+var instance = di.Resolve<IFirstInterface>();
+var instance1 = di.Resolve<IFirstInterface>();
 
+Console.WriteLine(instance);
+Console.WriteLine(instance1);
+
+// result: as predicted - its fine

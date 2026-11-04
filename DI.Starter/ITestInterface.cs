@@ -1,11 +1,11 @@
 ﻿namespace DI.Starter;
 
-public interface ITestImplementation
+public interface ITestInterface
 {
     
 }
 
-public class TestImplementation : ITestImplementation
+public class TestInterface : ITestInterface
 {
     public override string ToString()
     {

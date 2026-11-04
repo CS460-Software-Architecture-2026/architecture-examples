@@ -7,9 +7,9 @@ public interface IFirstInterface
 
 public class FirstImplementation : IFirstInterface
 {
-    private ITestImplementation test_instance;
+    private ITestInterface test_instance;
 
-    public FirstImplementation(ITestImplementation test_instance)
+    public FirstImplementation(ITestInterface test_instance)
     {
         this.test_instance = test_instance;
     }
