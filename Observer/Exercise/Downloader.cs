@@ -8,7 +8,6 @@ namespace Observer.Exercise;
 // Implement two variants: OOP Observer with an interface, and C# delegates/events.
 public class Downloader
 {
-    
     public void UpdateProgress(int percentage)
     {
         // TODO: Update progress and notify subscribers.
