@@ -20,7 +20,7 @@ public class DiContainer : IDiContainer
     public object Resolve(Type type)
     {
         var binding = typesToImplementation[type];
-        if (typesToObjects.TryGetValue(type, out var result))
+        if (binding.Scope == Scope.Singleton && typesToObjects.TryGetValue(type, out var result))
         {
             return result;
         }
@@ -34,7 +34,10 @@ public class DiContainer : IDiContainer
         }
 
         var instance = constructor.Invoke(args.ToArray());
-        typesToObjects[type] = instance;
+        if (binding.Scope == Scope.Singleton)
+        {
+            typesToObjects[type] = instance;
+        }
         return instance;
     }
 
