@@ -1,3 +1,5 @@
+using IDownloaderListener = Observer.Exercise.IDownloaderListener;
+
 namespace Observer.Exercise;
 
 // Simulate download progress (0–100); no actual downloading is required.
@@ -8,9 +10,35 @@ namespace Observer.Exercise;
 // Implement two variants: OOP Observer with an interface, and C# delegates/events.
 public class Downloader
 {
-    
+    private readonly List<IDownloaderListener> listeners = new();
+    private int currentProgress;
+
+    public event Action<int>? ProgressChanged;
+
+    public void AddListener(IDownloaderListener listener)
+    {
+        listeners.Add(listener);
+    }
+
+    public void RemoveListener(IDownloaderListener listener)
+    {
+        listeners.Remove(listener);
+    }
+
     public void UpdateProgress(int percentage)
     {
-        // TODO: Update progress and notify subscribers.
+        if (percentage == currentProgress)
+        {
+            return;
+        }
+
+        currentProgress = percentage;
+
+        foreach (var listener in listeners)
+        {
+            listener.OnPercentageUpdate(percentage);
+        }
+
+        ProgressChanged?.Invoke(percentage);
     }
 }
