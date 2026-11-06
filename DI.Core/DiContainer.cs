@@ -5,6 +5,19 @@ public class DiContainer : IDiContainer
     private readonly Dictionary<Type, Binding> typesToImplementation = new();
     
     private readonly Dictionary<Type, object> typesToObjects = new();
+    
+    public void Register<TInterface>(TInterface instance) 
+    {
+        ArgumentNullException.ThrowIfNull(instance);
+        
+        typesToImplementation[typeof(TInterface)] = new Binding()
+        {
+            InterfaceType = typeof(TInterface),
+            ImplementationType = instance.GetType(),
+            Scope = Scope.Singleton
+        };
+        typesToObjects[typeof(TInterface)] = instance;
+    }
 
     public void Register<TInterface, TImplementation>(Scope scope) 
         where TImplementation : TInterface
@@ -20,11 +33,12 @@ public class DiContainer : IDiContainer
     public object Resolve(Type type)
     {
         var binding = typesToImplementation[type];
-        if (typesToObjects.TryGetValue(type, out var result))
+        if (binding.Scope == Scope.Singleton && typesToObjects.TryGetValue(type, out var result))
         {
             return result;
         }
-        
+
+
         var implementationType = binding.ImplementationType;
         var constructor = implementationType.GetConstructors().First();
         var args = new List<object>();
@@ -43,6 +57,8 @@ public class DiContainer : IDiContainer
         return (T)Resolve(typeof(T));
     }
     
+
+
     private class Binding
     {
         public required Type InterfaceType { get; init; }
