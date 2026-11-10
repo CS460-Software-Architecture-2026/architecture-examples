@@ -1,33 +1,19 @@
-﻿namespace Examples.TicTacToe.Consoled
+﻿using ConsoleInputBase = Examples.TicTacToe.Consoled.ConsoleInputBase;
+
+namespace Examples.TicTacToe.Consoled
 {
-    using System;
     using Examples.TicTacToe;
 
-    public  class ConsoleInput
+    // Original controller: "move X Y" with coordinates 0-2.
+    public class ConsoleInput : ConsoleInputBase
     {
-        public void StartProcessing(TicTacToeWithEvents game)
+        protected override string MoveHint => "MOVE X Y (X, Y from 0 to 2)";
+
+        protected override void HandleMoveCommand(TicTacToeWithEvents game, string[] splitCommand)
         {
-            string command = null;
-            Console.Out.WriteLine("Welcome to greatest Tic Tac Toe game! Type START to play ");
-            while (true)
-            {
-                command = ReadLine.Read("> ");
-                var splitCommand = command.Split(new char[0]);
-                switch (splitCommand[0].ToLower())
-                {
-                    case "start":
-                        game.StartGame();
-                        break;
-                    case "exit":
-                        break;
-                    case "move":
-                        var x = int.Parse(splitCommand[1]);
-                        var y = int.Parse(splitCommand[2]);
-                        game.MakeMove(x, y);
-                        break;
-                }
-                
-            }
+            var x = int.Parse(splitCommand[1]);
+            var y = int.Parse(splitCommand[2]);
+            game.MakeMove(x, y);
         }
     }
 }

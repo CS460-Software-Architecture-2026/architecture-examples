@@ -42,7 +42,7 @@ namespace Examples.TicTacToe.Consoled
 
         private void GameOnGameStarted(Cell[,] obj)
         {
-            Console.Out.WriteLine("Game is started! Make your first move with MOVE X Y");
+            Console.Out.WriteLine("Game is started! Make your first move.");
         }
     }
 }

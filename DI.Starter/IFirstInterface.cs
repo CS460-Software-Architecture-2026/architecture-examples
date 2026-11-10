@@ -10,3 +10,11 @@ public class FirstImplementation : IFirstInterface
         return $"First_{GetHashCode()}";
     }
 }
+
+public class MyImplementation : IFirstInterface
+{
+    public override string ToString()
+    {
+        return $"My_{GetHashCode()}";
+    }
+}
