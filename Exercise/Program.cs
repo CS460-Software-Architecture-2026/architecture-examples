@@ -5,21 +5,28 @@ if (args.Length == 0)
     Console.WriteLine("Usage: dotnet run --project Exercise/Exercise.csproj -- <URL>");
     return;
 }
-
-var request = new HttpRequest
-{
-    Url = args[0],
-    Method = "POST",
-    Headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-    {
-        ["Content-Type"] = "application/json"
-    },
-    QueryParameters = new Dictionary<string, string>
-    {
-        ["preview"] = "true"
-    },
-    Body = "{\"product\":\"Keyboard\",\"quantity\":2}"
-};
+var request = HttpRequestBuilder.Create()
+    .Url(args[0])
+    .Method("POST")
+    .Header("Content-Type", "application/json")
+    .Query("preview", "true")
+    .Body("{\"product\":\"Keyboard\",\"quantity\":2}")
+    .Done()
+    .Build();
+// var request = new HttpRequest
+// {
+//     Url = args[0],
+//     Method = "POST",
+//     Headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+//     {
+//         ["Content-Type"] = "application/json"
+//     },
+//     QueryParameters = new Dictionary<string, string>
+//     {
+//         ["preview"] = "true"
+//     },
+//     Body = "{\"product\":\"Keyboard\",\"quantity\":2}"
+// };
 
 using var httpClient = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false });
 IClient client = new Client(httpClient);
