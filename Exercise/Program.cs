@@ -6,24 +6,39 @@ if (args.Length == 0)
     return;
 }
 
-var request = new HttpRequest
-{
-    Url = args[0],
-    Method = "POST",
-    Headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+var requestBuilder = HttpRequestBuilderWizard.Create()
+    .Url(args[0]).Method("POST")
+    .Headers(new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
     {
         ["Content-Type"] = "application/json"
-    },
-    QueryParameters = new Dictionary<string, string>
+    })
+    .Body("{\"product\":\"Keyboard\",\"quantity\":2}")
+    .QueryParameters(new Dictionary<string, string>
     {
         ["preview"] = "true"
-    },
-    Body = "{\"product\":\"Keyboard\",\"quantity\":2}"
-};
+    })
+    .Done();
+var request1 = requestBuilder.Build();
+var request2 = requestBuilder.Build();
+    
+// var request = new HttpRequest
+// {
+//     Url = args[0],
+//     Method = "POST",
+//     Headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+//     {
+//         ["Content-Type"] = "application/json"
+//     },
+//     QueryParameters = new Dictionary<string, string>
+//     {
+//         ["preview"] = "true"
+//     },
+//     Body = "{\"product\":\"Keyboard\",\"quantity\":2}"
+// };
 
 using var httpClient = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false });
 IClient client = new Client(httpClient);
 
-using var response = await client.SendAsync(request);
+using var response = await client.SendAsync(request1);
 Console.WriteLine($"Status: {(int)response.StatusCode} {response.StatusCode}");
 Console.WriteLine(await response.Content.ReadAsStringAsync());
