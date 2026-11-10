@@ -5,23 +5,18 @@ public class QuizExercise
     public void Run()
     {
         Console.WriteLine("QUIZ EXERCISE");
-        var questions = new[]
+        var questions = new List<Question>
         {
-            new Question(
-                QuestionType.Text,
-                "What is the capital of France?",
-                "Paris",
-                Array.Empty<string>()),
-            new Question(
-                QuestionType.MultipleChoice,
+            new TextQuestion("What is the capital of France?", "Paris"),
+            new MultipleChoiceQuestion(
                 "Which number is prime?",
                 "2",
                 new[] { "4", "7", "9" }),
-            new Question(
-                QuestionType.Text,
-                "Which C# keyword creates a new object?",
-                "new",
-                Array.Empty<string>())
+            new TextQuestion("Which C# keyword creates a new object?", "new"),
+            new NumericQuestion(
+                "What is 100 rounded to the nearest ten?",
+                100,
+                5)
         };
 
         new QuizRunner().Run(questions);
