@@ -2,27 +2,17 @@ namespace ISP.Exercise;
 
 public class CourseAnnouncements : ICourseAnnouncements
 {
-    public void SendToStudent(IStudent student, string courseCode, string subject, string body)
+    public void Send(IPerson recipient, string courseCode, string subject, string body)
     {
-        Console.WriteLine($"To: {student.FullName} <{student.Email}> | {courseCode}: {subject} | {body}");
-    }
-
-    public void SendToTeacher(ITeacher teacher, string courseCode, string subject, string body)
-    {
-        Console.WriteLine($"To: {teacher.FullName} <{teacher.Email}> | {courseCode}: {subject} | {body}");
+        Console.WriteLine($"To: {recipient.FullName} <{recipient.Email}> | {courseCode}: {subject} | {body}");
     }
 }
 
 public class AttendanceTracker : IAttendanceTracker
 {
-    public void MarkPresent(IStudent student, string courseCode, DateOnly date)
+    public void MarkPresent(IPerson attendee, string courseCode, DateOnly date)
     {
-        Console.WriteLine($"{date:yyyy-MM-dd} | {courseCode} | {student.Id} {student.FullName}: present");
-    }
-
-    public void MarkPresentTeacher(ITeacher teacher, string courseCode, DateOnly date)
-    {
-        Console.WriteLine($"{date:yyyy-MM-dd} | {courseCode} | {teacher.Id} {teacher.FullName}: present");
+        Console.WriteLine($"{date:yyyy-MM-dd} | {courseCode} | {attendee.Id} {attendee.FullName}: present");
     }
 }
 
@@ -50,4 +40,11 @@ public class ContractsBilling : IContractsBilling
     {
         return student.OutstandingBalance;
     }
+}
+
+public class Auditor : IPerson
+{
+    public Guid Id { get; init; }
+    public string FullName { get; init; } = "";
+    public string Email { get; init; } = "";
 }

@@ -7,14 +7,12 @@ namespace ISP.Exercise;
 
 public interface ICourseAnnouncements
 {
-    void SendToStudent(IStudent student, string courseCode, string subject, string body);
-    void SendToTeacher(ITeacher teacher, string courseCode, string subject, string body);
+    void Send(IPerson recipient, string courseCode, string subject, string body);
 }
 
 public interface IAttendanceTracker
 {
-    void MarkPresent(IStudent student, string courseCode, DateOnly date);
-    void MarkPresentTeacher(ITeacher teacher, string courseCode, DateOnly date);
+    void MarkPresent(IPerson attendee, string courseCode, DateOnly date);
 }
 
 public interface IGradebook
