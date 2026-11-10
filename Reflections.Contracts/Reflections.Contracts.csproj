@@ -5,5 +5,6 @@
         <Nullable>enable</Nullable>
         <AssemblyName>Command.Contracts</AssemblyName>
         <RootNamespace>CommandContracts</RootNamespace>
+        <OutputType>Exe</OutputType>
     </PropertyGroup>
 </Project>
