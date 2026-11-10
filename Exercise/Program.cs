@@ -1,5 +1,18 @@
 using Exercise;
 
+var builder = new HttpRequestBuilder()
+    .Url("http://localhost:5000/echo")
+    .Method("POST")
+    .Header("Content-Type", "application/json")
+    .Body("{}");
+
+var r1 = builder.Build();
+builder.Header("X-Test", "1");
+var r2 = builder.Build();
+
+Console.WriteLine($"r1 headers: {r1.Headers.Count}");
+Console.WriteLine($"r2 headers: {r2.Headers.Count}");
+
 if (args.Length == 0)
 {
     Console.WriteLine("Usage: dotnet run --project Exercise/Exercise.csproj -- <URL>");
