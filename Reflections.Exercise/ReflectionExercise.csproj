@@ -1,0 +1,5 @@
+<ItemGroup>
+  <Reference Include="Command.Contracts">
+    <HintPath>Reflections.Exercise/Command.Contracts.dll</HintPath>
+  </Reference>
+</ItemGroup>
